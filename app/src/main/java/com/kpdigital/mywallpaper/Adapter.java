@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, setWallpaper.class);
                 intent.putExtra("image", wallpaper.get(position).getSrc().getRegular());
+                intent.putExtra("name", wallpaper.get(position).getUser().getName());
+                intent.putExtra("userUrl", wallpaper.get(position).getUser().getLinks().getHtml());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -75,13 +78,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return wallpaper.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-
-
-
-
 
 
         public ViewHolder(@NonNull View itemView) {

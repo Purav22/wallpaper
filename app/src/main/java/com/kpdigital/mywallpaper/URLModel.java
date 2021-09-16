@@ -1,32 +1,10 @@
 package com.kpdigital.mywallpaper;
 
 public class URLModel {
-    int id,width,height;
+
     private String regular;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public String getRegular() {
         return regular;
@@ -36,12 +14,12 @@ public class URLModel {
         this.regular = regular;
     }
 
-    public URLModel(int id, int width, int height, String regular) {
-        this.id = id;
-        this.width = width;
-        this.height = height;
+    public URLModel(String regular) {
+
         this.regular = regular;
     }
+
+
 
     //    public int getId() {
 //        return id;

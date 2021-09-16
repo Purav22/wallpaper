@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.FadingCircle;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
 
@@ -35,16 +41,21 @@ public class car extends Fragment {
     private int pageSize = 30;
     private boolean isLoading;
     private boolean isLastPage;
+    ProgressBar progressBar;
+    TextView textView;
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.car,container,false);
         recyclerView = view.findViewById(R.id.recyclerView3);
-
+        progressBar = view.findViewById(R.id.progressbar3);
+        Sprite doubleBounce = new FadingCircle();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        progressBar.setVisibility(View.VISIBLE);
 //        editText = getActivity().findViewById(R.id.searchEditText);
         manager = new GridLayoutManager(container.getContext(),2);
-
+        textView = view.findViewById(R.id.fail_msg2);
         modelClassList = new ArrayList<>();
         recyclerView.setLayoutManager(manager);
         adapter = new Adapter(container.getContext(),modelClassList);
@@ -97,7 +108,9 @@ public class car extends Fragment {
                 if(response.isSuccessful()){
                     modelClassList.addAll(response.body().getPhotos());
                     adapter.notifyDataSetChanged();
-                }isLoading = false;
+                }
+                progressBar.setVisibility(View.INVISIBLE);
+                isLoading = false;
                 if(modelClassList.size() > 0) {
                     isLastPage= modelClassList.size() < pageSize;
                 }else{
@@ -107,8 +120,10 @@ public class car extends Fragment {
 
             @Override
             public void onFailure(Call<searchModel> call, Throwable t) {
-
+                textView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
+
     }
 }

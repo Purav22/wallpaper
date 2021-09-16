@@ -19,8 +19,6 @@ public interface APIInterface {
     Call<List<ImageModel>> getImage(
             @Query("orientation") String orientation,
             @Query("q") int q,
-            @Query("w") int w,
-            @Query("h") int h,
             @Query("page") int page,
             @Query("per_page") int per_page
     );
@@ -41,9 +39,8 @@ public interface APIInterface {
 
     @Headers("Authorization: Client-ID " + API)
     @GET("/topics")
-    Call<searchModel> getTopics(
-            @Query("page") int page,
-            @Query("per_page") int per_page
+    Call<List<String>> getTopics(
+
     );
 
 }

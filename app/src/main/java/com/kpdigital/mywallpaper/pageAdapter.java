@@ -21,22 +21,22 @@ public class pageAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                trending t = new trending();
+                home t = new home();
                 return t;
             case 1:
-                nature n = new nature();
+                top n = new top();
                 return n;
             case 2:
-                background b = new background();
-                return b;
-            case 3:
-                city c = new city();
+                car c = new car();
                 return c;
+            case 3:
+                nature na = new nature();
+                return na;
             case 4:
-                car Car = new car();
-                return Car;
+                food fd = new food();
+                return fd;
             case 5:
-                animal a = new animal();
+                travel a = new travel();
                 return a;
             case 6:
                 allCategory ac = new allCategory();

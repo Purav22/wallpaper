@@ -17,7 +17,14 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.FadingCircle;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
 
@@ -38,11 +45,18 @@ public class searchForImage extends AppCompatActivity {
 
     Adapter adapter;
     String query;
+    TextView textView;
     GridLayoutManager manager;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_for_image);
+        progressBar = (ProgressBar)findViewById(R.id.progressbar2);
+        Sprite doubleBounce = new FadingCircle();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        progressBar.setVisibility(View.INVISIBLE);
+        textView = findViewById(R.id.fail_msg1);
 
         editText = findViewById(R.id.searchEditText);
         btn = findViewById(R.id.searchIcon);
@@ -62,8 +76,12 @@ public class searchForImage extends AppCompatActivity {
                 if(query.length() == 0) {
                     Toast.makeText(getApplicationContext(),"Enter any keyword", Toast.LENGTH_SHORT).show();
                 }else{
+
+                    progressBar.setVisibility(View.VISIBLE);
                     getSearchImage(query);
                 }
+                editText.setText("");
+                hideKeyboard(v);
             }
         });
 
@@ -80,8 +98,10 @@ public class searchForImage extends AppCompatActivity {
                     if(query.length() == 0) {
                         Toast.makeText(getApplicationContext(),"Enter any keyword", Toast.LENGTH_SHORT).show();
                     }else{
+                        progressBar.setVisibility(View.VISIBLE);
                         getSearchImage(query);
                     }
+                    editText.setText("");
                     hideKeyboard(v);
                     return true;
                 }
@@ -110,7 +130,6 @@ public class searchForImage extends AppCompatActivity {
             }
         });
 
-        Log.e("Done", String.valueOf(height));
     }
 
     private void getSearchImage(String query) {
@@ -122,7 +141,9 @@ public class searchForImage extends AppCompatActivity {
                 if(response.isSuccessful()){
                     modelClassList.addAll(response.body().getPhotos());
                     adapter.notifyDataSetChanged();
-                }isLoading = false;
+                }
+                progressBar.setVisibility(View.INVISIBLE);
+                isLoading = false;
                 if(modelClassList.size() > 0) {
                     isLastPage= modelClassList.size() < pageSize;
                 }else{
@@ -132,9 +153,11 @@ public class searchForImage extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<searchModel> call, Throwable t) {
-
+                textView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
+
     }
 
     public void hideKeyboard(View view) {

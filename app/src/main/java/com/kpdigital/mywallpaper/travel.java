@@ -4,13 +4,13 @@ import static com.kpdigital.mywallpaper.MainActivity.height;
 import static com.kpdigital.mywallpaper.MainActivity.width;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,38 +18,47 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.FadingCircle;
+import com.github.ybq.android.spinkit.style.Wave;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class background extends Fragment {
+public class travel extends Fragment {
     private ArrayList<ImageModel> modelClassList;
     private RecyclerView recyclerView;
 //    EditText editText;
 //    ImageButton search;
-    Adapter adapter;
     GridLayoutManager manager;
+    ProgressBar progressBar;
     private int page = 1;
     private int pageSize = 30;
     private boolean isLoading;
     private boolean isLastPage;
+    Adapter adapter;
+    TextView textView;
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.background,container,false);
-        recyclerView = view.findViewById(R.id.recyclerView4);
-
+        View view =  inflater.inflate(R.layout.travel,container,false);
+        recyclerView = view.findViewById(R.id.recyclerView5);
+        progressBar = view.findViewById(R.id.progressbar9);
+        Sprite doubleBounce = new FadingCircle();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        progressBar.setVisibility(View.VISIBLE);
 //        editText = getActivity().findViewById(R.id.searchEditText);
         manager = new GridLayoutManager(container.getContext(),2);
-
+        textView = view.findViewById(R.id.fail_msg8);
         modelClassList = new ArrayList<>();
         recyclerView.setLayoutManager(manager);
         adapter = new Adapter(container.getContext(),modelClassList);
         recyclerView.setAdapter(adapter);
-        getSearchImage("background");
+        getSearchImage("travel");
 //        getActivity().findViewById(R.id.searchIcon).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -80,7 +89,7 @@ public class background extends Fragment {
                 if(!isLoading && !isLastPage){
                     if((visibleItem + firstVisibleItemPosition >= totalItem) && firstVisibleItemPosition >= 0 && totalItem >= pageSize){
                         page++;
-                        getSearchImage("background");
+                        getSearchImage("travel");
                     }
                 }
             }
@@ -97,7 +106,10 @@ public class background extends Fragment {
                 if(response.isSuccessful()){
                     modelClassList.addAll(response.body().getPhotos());
                     adapter.notifyDataSetChanged();
-                }isLoading = false;
+                }
+
+                progressBar.setVisibility(View.INVISIBLE);
+                isLoading = false;
                 if(modelClassList.size() > 0) {
                     isLastPage= modelClassList.size() < pageSize;
                 }else{
@@ -107,8 +119,13 @@ public class background extends Fragment {
 
             @Override
             public void onFailure(Call<searchModel> call, Throwable t) {
-
+                textView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
+
+
+
+
 }

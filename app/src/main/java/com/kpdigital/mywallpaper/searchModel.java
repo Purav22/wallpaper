@@ -6,6 +6,7 @@ public class searchModel {
 
     private ArrayList<ImageModel> results;
 
+
     public ArrayList<ImageModel> getPhotos() {
         return results;
     }
