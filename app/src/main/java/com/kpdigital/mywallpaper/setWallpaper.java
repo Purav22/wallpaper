@@ -251,11 +251,20 @@ public class setWallpaper extends AppCompatActivity {
     }
 
     private void onPlushButtonClick() {
-        setVisibility(clicked);
-        setAnimation(clicked);
-        setClicking(clicked);
-        if(!clicked) clicked = true;
-        else clicked = false;
+
+        if(!clicked){
+            setVisibility(clicked);
+            setAnimation(clicked);
+            setClicking(clicked);
+            clicked = true;
+        }
+
+        else{
+            setAnimation(clicked);
+            setVisibility(clicked);
+            setClicking(clicked);
+            clicked = false;
+        }
     }
 
     private void setAnimation(boolean click) {

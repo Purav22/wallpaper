@@ -95,7 +95,6 @@
         android:focusable="true"
         android:src="@drawable/smartphone"
         android:visibility="invisible"
-
         app:backgroundTint="#AEABAB"
         app:fabSize="mini"
         app:maxImageSize="35dp" />

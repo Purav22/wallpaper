@@ -4,6 +4,8 @@ package com.kpdigital.mywallpaper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,8 +34,10 @@ public class likedWallpaper extends AppCompatActivity {
         liked_adapter = new likedAdapter(this);
         recyclerView.setAdapter(liked_adapter);
 
-
-
+        if(MainActivity.liked_name.size() == 0) {
+            TextView textView = findViewById(R.id.fail_msg5);
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
 }

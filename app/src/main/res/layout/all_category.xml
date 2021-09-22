@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView6"
-        android:background="@drawable/maincolor_gradient"
         android:padding="5dp"
         >
 

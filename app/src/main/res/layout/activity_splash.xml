@@ -21,9 +21,9 @@
      android:layout_alignParentBottom="true"
      android:layout_centerHorizontal="true"
      android:layout_marginBottom="20dp"
-     android:fontFamily="@font/almendra_display"
+     android:fontFamily="@font/josefin_sans_bold"
      android:text="KP Digital"
-     android:textColor="#ffdf2b"
+     android:textColor="@color/black"
      android:textSize="25dp"
      android:textStyle="bold"/>
 </RelativeLayout>

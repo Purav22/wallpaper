@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".aboutUs">
+
+    <ImageView
+        android:id="@+id/logo_about_us"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_about_us"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/boarder"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/desclaimer"
+        android:fontFamily="@font/nunito_bold"
+
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Desclaimer"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desclaimer"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nunito"
+            android:text="All the wallpapers in this app are under common creative license and the credit goes to their respective owners. These images are not endorsed by any of the prospective owners, and the images are used simply for aesthetic purposes. No copyright infringement is intended, and any request to remove one of the images/logos/ names will be honored. All the Images are obtained from unsplash.com which are covered by the Creative Commons Zero license. That means all images are free for distribution and free for commercial use which also does not need any kind of attribution or credit." />
+    </LinearLayout>
+
+</RelativeLayout>

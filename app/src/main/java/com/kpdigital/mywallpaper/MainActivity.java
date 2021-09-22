@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                         startActivity(intent);
                         break;
                     case R.id.nav_aboutUs:
-
+                        Intent i = new Intent(getApplicationContext(), aboutUs.class);
+                        startActivity(i);
                         break;
                     case R.id.nav_rateUs:
                         try {
@@ -131,6 +133,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
                         }
                         break;
+                    case R.id.nav_moreApps:
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=KP+Digital")));
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                        }
                 }
                 drawer.closeDrawer(GravityCompat.START);
 
